@@ -1,5 +1,5 @@
-import ACTION from '../actions/actionTypes';
-import CONTANTS from '../constants';
+import ACTIONS from '../actions/actionTypes';
+
 
 const initialState = {
   isFetching: true,
@@ -16,9 +16,9 @@ const initialState = {
   isShowModal: false,
 };
 
-export default function (state = initialState, action) {
+const getContestByIdReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ACTION.GET_CONTEST_BY_ID_REQUEST: {
+    case ACTIONS.GET_CONTEST_BY_ID_REQUEST: {
       return {
         ...state,
         isFetching: true,
@@ -27,7 +27,7 @@ export default function (state = initialState, action) {
         offers: [],
       };
     }
-    case ACTION.GET_CONTEST_BY_ID_SUCCESS: {
+    case ACTIONS.GET_CONTEST_BY_ID_SUCCESS: {
       return {
         ...state,
         isFetching: false,
@@ -36,27 +36,27 @@ export default function (state = initialState, action) {
         offers: action.data.offers,
       };
     }
-    case ACTION.CHANGE_CONTEST_VIEW_MODE: {
+    case ACTIONS.CHANGE_CONTEST_VIEW_MODE: {
       return {
         ...state,
         isEditContest: false,
         isBrief: action.data,
       };
     }
-    case ACTION.CHANGE_EDIT_CONTEST: {
+    case ACTIONS.CHANGE_EDIT_CONTEST: {
       return {
         ...state,
         isEditContest: action.data,
       };
     }
-    case ACTION.GET_CONTEST_BY_ID_ERROR: {
+    case ACTIONS.GET_CONTEST_BY_ID_ERROR: {
       return {
         ...state,
         isFetching: false,
         error: action.error,
       };
     }
-    case ACTION.UPDATE_STORE_AFTER_UPDATE_CONTEST: {
+    case ACTIONS.UPDATE_STORE_AFTER_UPDATE_CONTEST: {
       return {
         ...state,
         error: null,
@@ -64,71 +64,71 @@ export default function (state = initialState, action) {
         contestData: { ...state.contestData, ...action.data },
       };
     }
-    case ACTION.ADD_NEW_OFFER_TO_STORE: {
+    case ACTIONS.ADD_NEW_OFFER_TO_STORE: {
       return {
         ...state,
         error: null,
         offers: [...action.data],
       };
     }
-    case ACTION.CHANGE_MARK_SUCCESS: {
+    case ACTIONS.CHANGE_MARK_SUCCESS: {
       return {
         ...state,
         error: null,
         offers: [...action.data],
       };
     }
-    case ACTION.CHANGE_STORE_FOR_STATUS: {
+    case ACTIONS.CHANGE_STORE_FOR_STATUS: {
       return {
         ...state,
         error: null,
         offers: [...action.data],
       };
     }
-    case ACTION.CHANGE_MARK_ERROR: {
+    case ACTIONS.CHANGE_MARK_ERROR: {
       return {
         ...state,
         changeMarkError: action.error,
       };
     }
-    case ACTION.ADD_OFFER_ERROR: {
+    case ACTIONS.ADD_OFFER_ERROR: {
       return {
         ...state,
         addOfferError: action.error,
       };
     }
-    case ACTION.SET_OFFER_STATUS_ERROR: {
+    case ACTIONS.SET_OFFER_STATUS_ERROR: {
       return {
         ...state,
         setOfferStatusError: action.error,
       };
     }
-    case ACTION.CLEAR_ADD_OFFER_ERROR: {
+    case ACTIONS.CLEAR_ADD_OFFER_ERROR: {
       return {
         ...state,
         addOfferError: null,
       };
     }
-    case ACTION.CLEAR_SET_OFFER_STATUS_ERROR: {
+    case ACTIONS.CLEAR_SET_OFFER_STATUS_ERROR: {
       return {
         ...state,
         setOfferStatusError: null,
       };
     }
-    case ACTION.CLEAR_CHANGE_MARK_ERROR: {
+    case ACTIONS.CLEAR_CHANGE_MARK_ERROR: {
       return {
         ...state,
         changeMarkError: null,
       };
     }
-    case ACTION.CHANGE_SHOW_IMAGE: {
+    case ACTIONS.CHANGE_SHOW_IMAGE: {
       return {
         ...state,
         isShowOnFull: action.data.isShowOnFull,
         imagePath: action.data.imagePath,
       };
     }
-    case ACTION.CHANGE_SHOW_MODAL: {
+    case ACTIONS.CHANGE_SHOW_MODAL: {
       return {
         ...state,
         isShowModal: action.data,
@@ -138,3 +138,5 @@ export default function (state = initialState, action) {
       return state;
   }
 }
+
+export default getContestByIdReducer

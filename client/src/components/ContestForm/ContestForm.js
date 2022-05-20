@@ -1,4 +1,4 @@
-import React from 'react';
+import {React, Component} from 'react';
 import { Form, Formik } from 'formik';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -29,7 +29,7 @@ const variableOptions = {
   },
 };
 
-class ContestForm extends React.Component {
+class ContestForm extends Component {
     getPreference = () => {
       const { contestType } = this.props;
       switch (contestType) {
@@ -48,8 +48,10 @@ class ContestForm extends React.Component {
           this.props.getData({ characteristic1: 'brandStyle' });
           break;
         }
+        default: return
       }
     }
+    
 
     componentDidMount() {
       this.getPreference();

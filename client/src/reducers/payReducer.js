@@ -1,4 +1,4 @@
-import ACTION from '../actions/actionTypes';
+import ACTIONS from '../actions/actionTypes';
 
 const initialState = {
   isFetching: false,
@@ -6,32 +6,34 @@ const initialState = {
   focusOnElement: 'number',
 };
 
-export default function (state = initialState, action) {
+const payReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ACTION.CHANGE_FOCUS_ON_CARD: {
+    case ACTIONS.CHANGE_FOCUS_ON_CARD: {
       return {
         ...state,
         focusOnElement: action.data,
       };
     }
-    case ACTION.PAYMENT_ACTION_REQUEST: {
+    case ACTIONS.PAYMENT_ACTION_REQUEST: {
       return {
         ...state,
         isFetching: true,
         error: null,
       };
     }
-    case ACTION.PAYMENT_ACTION_ERROR: {
+    case ACTIONS.PAYMENT_ACTION_ERROR: {
       return {
         ...state,
         isFetching: false,
         error: action.error,
       };
     }
-    case ACTION.CLEAR_PAYMENT_STORE: {
+    case ACTIONS.CLEAR_PAYMENT_STORE: {
       return initialState;
     }
     default:
       return state;
   }
 }
+
+export default payReducer

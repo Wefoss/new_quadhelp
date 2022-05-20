@@ -1,24 +1,24 @@
 import { put, select } from 'redux-saga/effects';
 import remove from 'lodash/remove';
 import isEqual from 'lodash/isEqual';
-import ACTION from '../actions/actionTypes';
+import ACTIONS from '../actions/actionTypes';
 import * as restController from '../api/rest/restController';
 
 export function* previewSaga() {
   try {
     const { data } = yield restController.getPreviewChat();
-    yield put({ type: ACTION.GET_PREVIEW_CHAT, data });
+    yield put({ type: ACTIONS.GET_PREVIEW_CHAT, data });
   } catch (err) {
-    yield put({ type: ACTION.GET_PREVIEW_CHAT_ERROR, error: err.response });
+    yield put({ type: ACTIONS.GET_PREVIEW_CHAT_ERROR, error: err.response });
   }
 }
 
 export function* getDialog(action) {
   try {
     const { data } = yield restController.getDialog(action.data);
-    yield put({ type: ACTION.GET_DIALOG_MESSAGES, data });
+    yield put({ type: ACTIONS.GET_DIALOG_MESSAGES, data });
   } catch (err) {
-    yield put({ type: ACTION.GET_DIALOG_MESSAGES_ERROR, error: err.response });
+    yield put({ type: ACTIONS.GET_DIALOG_MESSAGES_ERROR, error: err.response });
   }
 }
 
@@ -39,7 +39,7 @@ export function* sendMessage(action) {
       messagesPreview.push(data.preview);
     }
     yield put({
-      type: ACTION.SEND_MESSAGE,
+      type: ACTIONS.SEND_MESSAGE,
       data: {
         message: data.message,
         messagesPreview,
@@ -52,7 +52,7 @@ export function* sendMessage(action) {
       },
     });
   } catch (err) {
-    yield put({ type: ACTION.SEND_MESSAGE_ERROR, error: err.response });
+    yield put({ type: ACTIONS.SEND_MESSAGE_ERROR, error: err.response });
   }
 }
 
@@ -63,9 +63,9 @@ export function* changeChatFavorite(action) {
     messagesPreview.forEach((preview) => {
       if (isEqual(preview.participants, data.participants)) preview.favoriteList = data.favoriteList;
     });
-    yield put({ type: ACTION.CHANGE_CHAT_FAVORITE, data: { changedPreview: data, messagesPreview } });
+    yield put({ type: ACTIONS.CHANGE_CHAT_FAVORITE, data: { changedPreview: data, messagesPreview } });
   } catch (err) {
-    yield put({ type: ACTION.SET_CHAT_FAVORITE_ERROR, error: err.response });
+    yield put({ type: ACTIONS.SET_CHAT_FAVORITE_ERROR, error: err.response });
   }
 }
 
@@ -76,18 +76,18 @@ export function* changeChatBlock(action) {
     messagesPreview.forEach((preview) => {
       if (isEqual(preview.participants, data.participants)) preview.blackList = data.blackList;
     });
-    yield put({ type: ACTION.CHANGE_CHAT_BLOCK, data: { messagesPreview, chatData: data } });
+    yield put({ type: ACTIONS.CHANGE_CHAT_BLOCK, data: { messagesPreview, chatData: data } });
   } catch (err) {
-    yield put({ type: ACTION.SET_CHAT_BLOCK_ERROR, error: err.response });
+    yield put({ type: ACTIONS.SET_CHAT_BLOCK_ERROR, error: err.response });
   }
 }
 
 export function* getCatalogListSaga(action) {
   try {
     const { data } = yield restController.getCatalogList(action.data);
-    yield put({ type: ACTION.RECEIVE_CATALOG_LIST, data });
+    yield put({ type: ACTIONS.RECEIVE_CATALOG_LIST, data });
   } catch (err) {
-    yield put({ type: ACTION.RECEIVE_CATALOG_LIST_ERROR, error: err.response });
+    yield put({ type: ACTIONS.RECEIVE_CATALOG_LIST_ERROR, error: err.response });
   }
 }
 
@@ -101,18 +101,18 @@ export function* addChatToCatalog(action) {
         break;
       }
     }
-    yield put({ type: ACTION.ADD_CHAT_TO_CATALOG, data: catalogList });
+    yield put({ type: ACTIONS.ADD_CHAT_TO_CATALOG, data: catalogList });
   } catch (err) {
-    yield put({ type: ACTION.ADD_CHAT_TO_CATALOG_ERROR, error: err.response });
+    yield put({ type: ACTIONS.ADD_CHAT_TO_CATALOG_ERROR, error: err.response });
   }
 }
 
 export function* createCatalog(action) {
   try {
     const { data } = yield restController.createCatalog(action.data);
-    yield put({ type: ACTION.CREATE_CATALOG_SUCCESS, data });
+    yield put({ type: ACTIONS.CREATE_CATALOG_SUCCESS, data });
   } catch (err) {
-    yield put({ type: ACTION.CREATE_CATALOG_ERROR, error: err.response });
+    yield put({ type: ACTIONS.CREATE_CATALOG_ERROR, error: err.response });
   }
 }
 
@@ -121,9 +121,9 @@ export function* deleteCatalog(action) {
     yield restController.deleteCatalog(action.data);
     const { catalogList } = yield select((state) => state.chatStore);
     const newCatalogList = remove(catalogList, (catalog) => action.data.catalogId !== catalog._id);
-    yield put({ type: ACTION.DELETE_CATALOG_SUCCESS, data: newCatalogList });
+    yield put({ type: ACTIONS.DELETE_CATALOG_SUCCESS, data: newCatalogList });
   } catch (err) {
-    yield put({ type: ACTION.DELETE_CATALOG_ERROR, error: err.response });
+    yield put({ type: ACTIONS.DELETE_CATALOG_ERROR, error: err.response });
   }
 }
 
@@ -137,9 +137,9 @@ export function* removeChatFromCatalogSaga(action) {
         break;
       }
     }
-    yield put({ type: ACTION.REMOVE_CHAT_FROM_CATALOG_SUCCESS, data: { catalogList, currentCatalog: data } });
+    yield put({ type: ACTIONS.REMOVE_CHAT_FROM_CATALOG_SUCCESS, data: { catalogList, currentCatalog: data } });
   } catch (err) {
-    yield put({ type: ACTION.REMOVE_CHAT_FROM_CATALOG_ERROR, error: err.response });
+    yield put({ type: ACTIONS.REMOVE_CHAT_FROM_CATALOG_ERROR, error: err.response });
   }
 }
 
@@ -153,8 +153,8 @@ export function* changeCatalogName(action) {
         break;
       }
     }
-    yield put({ type: ACTION.CHANGE_CATALOG_NAME_SUCCESS, data: { catalogList, currentCatalog: data } });
+    yield put({ type: ACTIONS.CHANGE_CATALOG_NAME_SUCCESS, data: { catalogList, currentCatalog: data } });
   } catch (err) {
-    yield put({ type: ACTION.CHANGE_CATALOG_NAME_ERROR, error: err.response });
+    yield put({ type: ACTIONS.CHANGE_CATALOG_NAME_ERROR, error: err.response });
   }
 }

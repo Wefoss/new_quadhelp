@@ -1,4 +1,4 @@
-import ACTION from '../actions/actionTypes';
+import ACTIONS from '../actions/actionTypes';
 import CONSTANTS from '../constants';
 
 const initialState = {
@@ -6,15 +6,15 @@ const initialState = {
   isEdit: false,
 };
 
-export default function (state = initialState, action) {
+const userProfileReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ACTION.CHANGE_PROFILE_MODE_VIEW: {
+    case ACTIONS.CHANGE_PROFILE_MODE_VIEW: {
       return {
         ...state,
         profileModeView: action.data,
       };
     }
-    case ACTION.CHANGE_EDIT_MODE_ON_USER_PROFILE: {
+    case ACTIONS.CHANGE_EDIT_MODE_ON_USER_PROFILE: {
       return {
         ...state,
         isEdit: action.data,
@@ -24,3 +24,5 @@ export default function (state = initialState, action) {
       return state;
   }
 }
+
+export default userProfileReducer

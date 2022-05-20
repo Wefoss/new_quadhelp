@@ -1,4 +1,4 @@
-import ACTION from '../actions/actionTypes';
+import ACTIONS from '../actions/actionTypes';
 
 const initialState = {
   isFetching: true,
@@ -6,33 +6,35 @@ const initialState = {
   data: null,
 };
 
-export default function (state = initialState, action) {
+const updateContestReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ACTION.UPDATE_CONTEST_REQUEST: {
+    case ACTIONS.UPDATE_CONTEST_REQUEST: {
       return {
         isFetching: true,
         error: null,
         data: null,
       };
     }
-    case ACTION.UPDATE_CONTEST_SUCCESS: {
+    case ACTIONS.UPDATE_CONTEST_SUCCESS: {
       return {
         isFetching: false,
         error: null,
         data: action.data,
       };
     }
-    case ACTION.UPDATE_CONTEST_ERROR: {
+    case ACTIONS.UPDATE_CONTEST_ERROR: {
       return {
         isFetching: false,
         error: action.error,
         data: null,
       };
     }
-    case ACTION.CLEAR_UPDATE_CONTEST_STORE: {
+    case ACTIONS.CLEAR_UPDATE_CONTEST_STORE: {
       return initialState;
     }
     default:
       return state;
   }
 }
+
+export default updateContestReducer

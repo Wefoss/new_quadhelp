@@ -5,8 +5,11 @@ import { addMessage, changeBlockStatusInStore } from '../../../actions/actionCre
 
 class ChatSocket extends WebSocket {
   constructor(dispatch, getState, room) {
-    super(dispatch, getState, room);
-  }
+    super(dispatch, getState, room)
+    this.dispatch = dispatch
+    this.getState = getState
+    this.room = room
+      }
 
     anotherSubscribes = () => {
       this.onNewMessage();

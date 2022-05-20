@@ -1,17 +1,17 @@
-import ACTION from '../actions/actionTypes';
+import ACTIONS from '../actions/actionTypes';
 
 const initialState = {
   bundle: null,
 };
 
-export default function (state = initialState, action) {
+const bundleReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ACTION.SELECT_BUNDLE_ACTION: {
+    case ACTIONS.SELECT_BUNDLE_ACTION: {
       return {
         bundle: action.bundle,
       };
     }
-    case ACTION.CLEAR_BUNDLE_ACTION: {
+    case ACTIONS.CLEAR_BUNDLE_ACTION: {
       return {
         bundle: null,
       };
@@ -20,3 +20,5 @@ export default function (state = initialState, action) {
       return state;
   }
 }
+
+export default bundleReducer

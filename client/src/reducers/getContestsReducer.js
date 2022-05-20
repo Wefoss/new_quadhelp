@@ -1,4 +1,4 @@
-import ACTION from '../actions/actionTypes';
+import ACTIONS from '../actions/actionTypes';
 import CONSTANTS from '../constants';
 
 const initialState = {
@@ -16,16 +16,16 @@ const initialState = {
   haveMore: true,
 };
 
-export default function (state = initialState, action) {
+const getContestsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ACTION.GET_CONTESTS_ACTION_REQUEST: {
+    case ACTIONS.GET_CONTESTS_ACTION_REQUEST: {
       return {
         ...state,
         isFetching: true,
         error: null,
       };
     }
-    case ACTION.GET_CONTESTS_ACTION_SUCCESS: {
+    case ACTIONS.GET_CONTESTS_ACTION_SUCCESS: {
       return {
         ...state,
         isFetching: false,
@@ -34,7 +34,7 @@ export default function (state = initialState, action) {
         haveMore: action.data.haveMore,
       };
     }
-    case ACTION.GET_CONTESTS_ACTION_ERROR: {
+    case ACTIONS.GET_CONTESTS_ACTION_ERROR: {
       return {
         ...state,
         isFetching: false,
@@ -42,21 +42,21 @@ export default function (state = initialState, action) {
         contests: [],
       };
     }
-    case ACTION.CLEAR_CONTESTS_LIST: {
+    case ACTIONS.CLEAR_CONTESTS_LIST: {
       return {
         ...state,
         error: null,
         contests: [],
       };
     }
-    case ACTION.SET_NEW_CUSTOMER_FILTER: {
+    case ACTIONS.SET_NEW_CUSTOMER_FILTER: {
       return {
         ...initialState,
         isFetching: false,
         customerFilter: action.filter,
       };
     }
-    case ACTION.SET_NEW_CREATOR_FILTER: {
+    case ACTIONS.SET_NEW_CREATOR_FILTER: {
       return {
         ...initialState,
         isFetching: false,
@@ -67,3 +67,5 @@ export default function (state = initialState, action) {
       return state;
   }
 }
+
+export default getContestsReducer
