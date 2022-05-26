@@ -1,8 +1,12 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import { initSocket } from '../api/ws/socketController';
-import configureStore from './configureStore';
-import App from '../App';
+import React from "react";
+import { Provider } from "react-redux";
+import { Router } from "react-router";
+import { createBrowserHistory } from "history";
+import { initSocket } from "../api/ws/socketController";
+import configureStore from "./configureStore";
+import App from "../App";
+
+const history = createBrowserHistory()
 
 class Setup extends React.Component {
   constructor(props) {
@@ -15,7 +19,9 @@ class Setup extends React.Component {
   render() {
     return (
       <Provider store={this.state.store}>
-        <App />
+        <Router history={history}>
+          <App />
+          </Router>
       </Provider>
     );
   }
