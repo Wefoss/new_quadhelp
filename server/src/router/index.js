@@ -69,7 +69,7 @@ router.get(
   contestController.downloadFile,
 );
 
-router.post(
+router.patch(
   '/updateContest',
   checkToken.checkToken,
   upload.updateContestFile,
@@ -98,7 +98,7 @@ router.post(
   userController.changeMark,
 );
 
-router.post(
+router.patch(
   '/updateUser',
   checkToken.checkToken,
   upload.uploadAvatar,
@@ -148,7 +148,7 @@ router.post(
   chatController.createCatalog,
 );
 
-router.post(
+router.patch(
   '/updateNameCatalog',
   checkToken.checkToken,
   chatController.updateNameCatalog,
@@ -160,13 +160,13 @@ router.post(
   chatController.addNewChatToCatalog,
 );
 
-router.post(
+router.delete(
   '/removeChatFromCatalog',
   checkToken.checkToken,
   chatController.removeChatFromCatalog,
 );
 
-router.post(
+router.delete(
   '/deleteCatalog',
   checkToken.checkToken,
   chatController.deleteCatalog,
