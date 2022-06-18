@@ -5,7 +5,7 @@ import CONSTANTS from '../../constants.js';
 
 const Logo = ({ to, ...props }) => (
   <Link to={to}>
-    <img {...props} alt='Logo'/>
+    <img {...props} alt={props.alt}/>
   </Link>
 );
 

@@ -60,6 +60,7 @@ const UpdateUserInfoForm = (props) => {
         </div>
         <ImageUpload
           name="file"
+          value={props.initialValues.file || ''}
           classes={{
             uploadContainer: styles.imageUploadContainer,
             inputContainer: styles.uploadInputContainer,
@@ -82,6 +83,7 @@ const mapStateToProps = (state) => {
       firstName: data.firstName,
       lastName: data.lastName,
       displayName: data.displayName,
+      file: ''
     },
   };
 };

@@ -56,7 +56,7 @@ class CreatorDashboard extends React.Component {
       );
     };
 
-    componentWillReceiveProps(nextProps, nextContext) {
+    UNSAFE_componentWillReceiveProps(nextProps, nextContext) {
       if (nextProps.location.search !== this.props.location.search) {
         this.parseUrlForParams(nextProps.location.search);
       }
@@ -77,7 +77,7 @@ class CreatorDashboard extends React.Component {
 
     changePredicate = ({ name, value }) => {
       const { creatorFilter } = this.props;
-      this.props.newFilter({ [name]: value === 'Choose industry' ? null : value });
+      this.props.newFilter({ [name]: value === 'Choose industry' ? undefined : value });
       this.parseParamsToUrl({ ...creatorFilter, ...{ [name]: value === 'Choose industry' ? null : value } });
     };
 

@@ -14,6 +14,7 @@ const PayForm = (props) => {
   };
 
   const pay = (values) => {
+    console.log(values)
     props.sendRequest(values);
   };
 
@@ -37,8 +38,8 @@ const PayForm = (props) => {
             <>
               <div className={styles.cardContainer}>
                 <Cards
-                  number={number || ''}
                   name={name || ''}
+                  number={number || ''}
                   expiry={expiry || ''}
                   cvc={cvc || ''}
                   focused={focusOnElement}

@@ -17,6 +17,7 @@ class RegistrationForm extends React.Component {
   }
 
     clicked = (values) => {
+      console.log(values)
       this.props.register({
         data: {
           firstName: values.firstName,
