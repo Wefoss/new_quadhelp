@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Logo from '../../components/Logo';
@@ -8,8 +8,12 @@ import styles from './RegistrationPage.module.sass';
 import { clearErrorSignUpAndLogin } from '../../actions/actionCreator';
 import CONSTANTS from '../../constants';
 
-const RegistrationPage = (props) => {
-  props.clearError();
+const RegistrationPage = ({clearError, history}) => {
+  
+
+ useEffect(() => {
+  clearError()
+ }, [clearError]);   
 
   return (
     <div className={styles.signUpPage}>
@@ -25,7 +29,7 @@ const RegistrationPage = (props) => {
             </Link>
           </div>
         </div>
-        <RegistrationForm history={props.history} />
+        <RegistrationForm history={history} />
       </div>
       <div className={styles.footer}>
         <div className={styles.articlesMainContainer}>

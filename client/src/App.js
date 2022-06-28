@@ -17,6 +17,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ContestCreationPage from "./pages/ContestCreation/ContestCreationPage";
 import CONSTANTS from "./constants";
 import ChatContainer from "./components/Chat/ChatComponents/ChatContainer/ChatContainer";
+import HowItWorkPage from "./pages/HowItWorks/HowItWorkPage";
 
 class App extends Component {
   render() {
@@ -74,7 +75,12 @@ class App extends Component {
               contestType: CONSTANTS.LOGO_CONTEST,
               title: "LOGO",
             })}
+            
           />
+            <Route
+            exact
+            path="/how-it-works"
+            component={HowItWorkPage} />
           <Route exact path="/dashboard" component={PrivateHoc(Dashboard)} />
           <Route
             exact
