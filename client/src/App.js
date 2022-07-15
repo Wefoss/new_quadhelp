@@ -18,6 +18,7 @@ import ContestCreationPage from "./pages/ContestCreation/ContestCreationPage";
 import CONSTANTS from "./constants";
 import ChatContainer from "./components/Chat/ChatComponents/ChatContainer/ChatContainer";
 import HowItWorkPage from "./pages/HowItWorks/HowItWorkPage";
+import EventsContest from "./pages/EventsContest/EventsContest";
 
 class App extends Component {
   render() {
@@ -81,6 +82,10 @@ class App extends Component {
             exact
             path="/how-it-works"
             component={HowItWorkPage} />
+            <Route   
+            exact
+            path="/contest-events"
+            component={EventsContest}/>
           <Route exact path="/dashboard" component={PrivateHoc(Dashboard)} />
           <Route
             exact

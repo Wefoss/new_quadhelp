@@ -1,6 +1,11 @@
 import * as yup from 'yup';
 import valid from 'card-validator';
 
+
+const today = new Date();
+today.setHours(0, 0, 0, 0)
+
+
 const validationSchema = {
   LoginSchem: yup.object().shape({
     email: yup.string().email('check email').required('required'),
@@ -66,6 +71,11 @@ const validationSchema = {
   CatalogSchema: yup.object({
     catalogName: yup.string().test('test-catalogName', 'required', (value) => value && value.trim().length >= 1).required('required'),
   }),
+  EventsValidate: yup.object().shape({
+    title: yup.string().required('required'),
+    date: yup.date().default(() => new Date()).min(today, 'Date cannot be in the past'),
+    timeInterval: yup.string().required('required'),
+    }),
 };
 
 export default validationSchema
