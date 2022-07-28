@@ -1,0 +1,13 @@
+.progress_bar { 
+max-width: 1300px;
+margin: 0 auto;
+border-radius: 10px;
+background-color: #373a3e;
+min-height: 700px;
+}
+
+.progress_bar_content {
+display: flex;
+flex-direction: column;
+justify-content: center;
+}

@@ -1,0 +1,40 @@
+Form {
+display: flex;
+text-align: center;
+justify-content: center;
+padding: 2rem 1rem;
+}
+
+Form input, Form select, Form button {
+   min-width: 300px;
+   line-height: 1.5rem;
+   font-size: 1.2rem;
+   padding:  0.5rem;
+   border: none;
+   border-radius: 5px;
+}
+
+Form input+input+select {
+    margin-left: 1rem;
+}
+
+
+Form input:nth-child(even) {
+ min-width: 50px;
+ margin-left: 1rem;
+}
+
+Form select {
+    min-width: 50px;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+Form button{
+  min-width: auto;
+  transition: all 0.2s ease;
+}
+
+Form button:hover {
+    background-color: rgb(192, 197, 201);
+}

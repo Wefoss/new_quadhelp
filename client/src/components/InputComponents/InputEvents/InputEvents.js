@@ -3,13 +3,10 @@ import React from 'react';
 
 const InputEvents = (props) => {
 
-    // const choiseInput = () => {
-    //      return props.select : <input {...props}/>  ?
-    // }
-
-    return (
+     return (
         <>
-            {props.select ?  <select {...props}><option value="1">Hours</option>
+            {props.select ?  <select {...props}><option>Hours</option>
+             <option value="0">0</option>
              <option value="1">1</option>
              <option value="2">2</option>
              <option value="3">3</option>

@@ -73,8 +73,8 @@ const validationSchema = {
   }),
   EventsValidate: yup.object().shape({
     title: yup.string().required('required'),
-    date: yup.date().default(() => new Date()).min(today, 'Date cannot be in the past'),
-    timeInterval: yup.string().required('required'),
+    date: yup.date().min(today, 'Date cannot be in the past').required('required'),
+    time: yup.string().required(),
     }),
 };
 

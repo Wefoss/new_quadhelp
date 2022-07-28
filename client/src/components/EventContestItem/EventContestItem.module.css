@@ -1,0 +1,56 @@
+
+.progress_wrapper {
+position: relative;
+max-width: 600px;
+height: 50px;
+margin: 1rem;
+border-radius: 1rem;
+overflow: hidden;
+background-color: rgb(194, 179, 179);
+}
+
+.progress_events {
+width: 100%;
+position: absolute;
+height: inherit;
+padding: 0px;
+padding: 0px;
+border: none;
+background-color: aqua;
+}
+
+
+.progress_content {
+height: 100%;
+display: flex;
+align-items: center;
+justify-content: space-between;
+text-align: center;
+}
+
+
+.progress_wrapper .progress_content p{
+z-index: 20;
+margin: 0;
+padding: 0 3rem 0 1rem;
+overflow: hidden;
+object-fit: fill;
+text-overflow: ellipsis;
+    }
+
+.progress_content button {
+z-index: 20;
+height: 100%;
+padding: 0 1rem;
+position: absolute;
+right: 0%;
+border: none;
+background-color: plum;
+transition: all 0.3s ease;
+}
+
+.progress_content button:hover {
+transform: translateX(2px);
+box-shadow: -10px 0px 10px 1px rgba(201, 169, 169, 0.3);
+color: aliceblue;
+}
