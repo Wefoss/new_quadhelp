@@ -1,5 +1,6 @@
 import React from "react";
 import EventsForm from "../../components/EventsForm/EventsForm";
+import ButtonGroupe from "../../components/ButtonGroupe/ButtonGroupe";
 import styles from "./EventsContest.module.css";
 import { useState, useEffect } from "react";
 import EventContestItem from "../../components/EventContestItem/EventContestItem";
@@ -20,6 +21,7 @@ const EventsContest = () => {
 
   useEffect(() => {
     localStorage.setItem("events", JSON.stringify(events));
+    // localStorage.removeItem('events')
   }, [events]);
 
   const removeItem = (id) => {
@@ -51,29 +53,32 @@ const EventsContest = () => {
   };
 
   return (
-    <section className={styles.progress_bar}>
-      <div className={styles.progress_bar_content}>
-        <EventsForm submitFormEvents={submitFormEvents} />
-        <div className={styles.loading}>
-          <div className={styles.progress}>
-            {events.length ? (
-              events.map((el, id) => (
-                <EventContestItem
-                  key={id}
-                  title={el.title}
-                  id={el.id}
-                  start={el.start}
-                  end={el.end}
-                  removeItem={removeItem}
-                />
-              ))
-            ) : (
-              <h3>Add New Feature</h3>
-            )}
+    <>
+      <section className={styles.progress_bar}>
+        <div className={styles.container}>
+          <div className={styles.progress_bar_content}>
+            <EventsForm submitFormEvents={submitFormEvents} />
+            <div className={styles.progress}>
+              {events.length ? (
+                events.map((el, id) => (
+                  <EventContestItem
+                    key={id}
+                    title={el.title}
+                    id={el.id}
+                    start={el.start}
+                    end={el.end}
+                    removeItem={removeItem}
+                  />
+                ))
+              ) : (
+                <h3>Add New Feature</h3>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+      <ButtonGroupe />
+    </>
   );
 };
 

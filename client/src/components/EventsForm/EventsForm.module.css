@@ -1,7 +1,9 @@
 Form {
 display: flex;
+flex-wrap: wrap;
 text-align: center;
 justify-content: center;
+gap: 1rem;
 padding: 2rem 1rem;
 }
 
@@ -14,14 +16,18 @@ Form input, Form select, Form button {
    border-radius: 5px;
 }
 
+.text_content{
+    min-width: 250px;
+}
+
 Form input+input+select {
     margin-left: 1rem;
 }
 
 
 Form input:nth-child(even) {
- min-width: 50px;
- margin-left: 1rem;
+ min-width: 250px;
+
 }
 
 Form select {
@@ -38,3 +44,20 @@ Form button{
 Form button:hover {
     background-color: rgb(192, 197, 201);
 }
+
+
+ @media(min-width: 768px) {
+    .text_content {
+        min-width: 350px;
+    }
+    Form input:nth-child(even) {
+        min-width: 50px;
+         margin-left: 1rem;
+    }
+ }
+
+ @media(min-width: 564px) {
+    Form input:nth-child(even) {
+        min-width: auto;
+    }
+ }

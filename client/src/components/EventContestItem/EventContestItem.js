@@ -2,20 +2,20 @@ import React from "react";
 import styles from "./EventContestItem.module.css";
 import { useEffect, useRef, useState } from "react";
 
-
 const EventContestItem = ({ start, end, title, removeItem, id }) => {
   const [isDone, setIsDone] = useState(false);
-  const [timer, setTimer] = useState('')
+  const [timer, setTimer] = useState("");
   const currentItem = useRef();
-  const hours = Math.floor(timer / (1000 * 60 * 60))
-  const minutes = Math.floor((timer / 1000 / 60) % 60)
-  const seconds = Math.floor((timer / 1000 ) % 60)
+  const day = Math.floor(timer / (1000 * 60 * 60 * 24))
+  const hours = Math.floor(timer / (1000 * 60 * 60));
+  const minutes = Math.floor((timer / 1000 / 60) % 60);
+  const seconds = Math.floor((timer / 1000) % 60);
 
   useEffect(() => {
     setIsDone(false);
-      let intervel = setInterval(() => {
-      let max = end - start;
-      let currentTime = new Date().getTime();
+    const intervel = setInterval(() => {
+      const max = end - start;
+      const currentTime = new Date().getTime();
       let ellasped = currentTime - start;
       let prec = (ellasped / max) * 100;
       if (ellasped >= max) {
@@ -23,9 +23,9 @@ const EventContestItem = ({ start, end, title, removeItem, id }) => {
         setIsDone(true);
         clearInterval(intervel);
       }
-      setTimer(end - new Date().getTime())
-      currentItem.current.style.width =  prec.toFixed(2) + "%" ;
-        }, 1000);
+      setTimer(end - currentTime);
+      currentItem.current.style.width = prec.toFixed(2) + "%";
+    }, 1000);
 
     return () => {
       clearInterval(intervel);
@@ -40,7 +40,14 @@ const EventContestItem = ({ start, end, title, removeItem, id }) => {
         ref={currentItem}
       ></div>
       <div className={styles.progress_content}>
-        <p>{title}</p><p>{hours > 0 && hours+'h'} {minutes > 0 && minutes + 'm'} {seconds}s</p>
+        <p>
+          {title}
+          {isDone && <i style={{ color: "green" }} class="fa  fa-check"></i>}
+        </p>
+        <p className={styles.progress_timer}>
+          {day > 0 && day + 'd'} {hours > 0 && hours + "h"} {minutes > 0 && minutes + "m"}{" "}
+          {seconds > 0 && seconds + "s"}
+        </p>
         {isDone && <button onClick={() => removeItem(id)}>X</button>}
       </div>
     </div>

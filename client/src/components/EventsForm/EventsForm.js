@@ -16,7 +16,7 @@ let eventsValues = {
     return (
         <Formik className={styles.form} initialValues={eventsValues} onSubmit={props.submitFormEvents} validationSchema={validationSchema.EventsValidate}>
              <Form>
-              <Field type="text" name='title' placeholder='write a new feafure' as={InputEvents}/>
+              <Field className={styles.text_content} type="text" name='title' placeholder='write a new feafure' as={InputEvents}/>
               <Field type="date" name='date' placeholder='date' as={InputEvents}/>
               <Field select='select' as={InputEvents} name='time'/>
               <button type="submit">Add feature</button>

@@ -1,16 +1,15 @@
 
 .progress_wrapper {
 position: relative;
-max-width: 600px;
+width: 98%;
 height: 50px;
-margin: 1rem;
+margin-bottom: 1rem;
 border-radius: 1rem;
 overflow: hidden;
 background-color: rgb(194, 179, 179);
 }
 
 .progress_events {
-width: 100%;
 position: absolute;
 height: inherit;
 padding: 0px;
@@ -21,8 +20,8 @@ background-color: aqua;
 
 
 .progress_content {
-height: 100%;
 display: flex;
+height: 100%;
 align-items: center;
 justify-content: space-between;
 text-align: center;
@@ -32,7 +31,7 @@ text-align: center;
 .progress_wrapper .progress_content p{
 z-index: 20;
 margin: 0;
-padding: 0 3rem 0 1rem;
+padding: 0 1rem;
 overflow: hidden;
 object-fit: fill;
 text-overflow: ellipsis;
@@ -54,3 +53,22 @@ transform: translateX(2px);
 box-shadow: -10px 0px 10px 1px rgba(201, 169, 169, 0.3);
 color: aliceblue;
 }
+
+.progress_timer {
+   min-width: 120px;
+   
+}
+
+
+/* @media(min-width: 768px) {
+    .progress_wrapper {
+        width: 500px;
+            }
+  }
+
+  @media(min-width: 1200px) {
+    .progress_wrapper {
+        width: 550px;
+            }
+  } */
+
