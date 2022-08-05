@@ -1,4 +1,4 @@
-Form {
+.progressBar_form {
 display: flex;
 flex-wrap: wrap;
 text-align: center;
@@ -7,42 +7,45 @@ gap: 1rem;
 padding: 2rem 1rem;
 }
 
-Form input, Form select, Form button {
-   min-width: 300px;
-   line-height: 1.5rem;
-   font-size: 1.2rem;
-   padding:  0.5rem;
-   border: none;
-   border-radius: 5px;
+.progressBar_form input, .progressBar_form select, .progressBar_form button {
+min-width: 300px;
+line-height: 1.5rem;
+font-size: 1.2rem;
+padding:  0.5rem;
+border: none;
+border-radius: 5px;
 }
 
 .text_content{
-    min-width: 250px;
-}
-
-Form input+input+select {
-    margin-left: 1rem;
+min-width: 250px;
 }
 
 
-Form input:nth-child(even) {
+
+.progressBar_form input+input+select {
+margin-left: 1rem;
+}
+
+
+.progressBar_form input {
  min-width: 250px;
 
 }
 
-Form select {
-    min-width: 50px;
-    margin-right: 1rem;
-    cursor: pointer;
+.progressBar_form select {
+min-width: 50px;
+background-color: #fff;
+cursor: pointer;
 }
 
-Form button{
+.progressBar_form button{
   min-width: auto;
   transition: all 0.2s ease;
-}
+  height: auto;
+  }
 
-Form button:hover {
-    background-color: rgb(192, 197, 201);
+  .progressBar_form button:hover {
+background-color: rgb(192, 197, 201);
 }
 
 
@@ -50,14 +53,11 @@ Form button:hover {
     .text_content {
         min-width: 350px;
     }
-    Form input:nth-child(even) {
-        min-width: 50px;
-         margin-left: 1rem;
-    }
+ 
  }
 
  @media(min-width: 564px) {
-    Form input:nth-child(even) {
+    .progressBar_form div:nth-child(even) input {
         min-width: auto;
     }
  }

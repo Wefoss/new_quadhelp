@@ -11,6 +11,11 @@ const EventContestItem = ({ start, end, title, removeItem, id }) => {
   const minutes = Math.floor((timer / 1000 / 60) % 60);
   const seconds = Math.floor((timer / 1000) % 60);
 
+
+ const digitWithZero = (num, str) => {
+     return num < 10 ? '0' + num + str : num + str
+ }
+
   useEffect(() => {
     setIsDone(false);
     const intervel = setInterval(() => {
@@ -45,8 +50,10 @@ const EventContestItem = ({ start, end, title, removeItem, id }) => {
           {isDone && <i style={{ color: "green" }} class="fa  fa-check"></i>}
         </p>
         <p className={styles.progress_timer}>
-          {day > 0 && day + 'd'} {hours > 0 && hours + "h"} {minutes > 0 && minutes + "m"}{" "}
-          {seconds > 0 && seconds + "s"}
+          {day > 0 && day + 'd '} 
+          {hours > 0 ? digitWithZero(hours, 'h ') : day > 0 && hours + '00h '}
+          {minutes > 0 ? digitWithZero(minutes, 'm ') : hours > 0 && '00m '} 
+          {seconds > 0 ? digitWithZero(seconds, 's') : minutes > 0 && '00s'}
         </p>
         {isDone && <button onClick={() => removeItem(id)}>X</button>}
       </div>

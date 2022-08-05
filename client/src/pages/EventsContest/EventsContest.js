@@ -71,7 +71,7 @@ const EventsContest = () => {
                   />
                 ))
               ) : (
-                <h3>Add New Feature</h3>
+                <h3 style={{"textAlign": 'center'}}>Add New Feature</h3>
               )}
             </div>
           </div>

@@ -1,0 +1,16 @@
+.error {
+position: absolute;
+padding: 0 1rem;
+left: 50%;
+right: 50%;
+width: 50px;
+transform: translate(-50%, -50%);
+background: lightcoral;
+color: #fff;
+top: 100%;
+border-radius: 10px;
+}
+
+.errorBorder {
+    border: 1px solid lightcoral;
+    }
