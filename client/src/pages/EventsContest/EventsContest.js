@@ -60,7 +60,7 @@ const EventsContest = () => {
             <EventsForm submitFormEvents={submitFormEvents} />
             <div className={styles.progress}>
               {events.length ? (
-                events.map((el, id) => (
+                events.sort((a, b) => a.end - b.end).map((el, id) => (
                   <EventContestItem
                     key={id}
                     title={el.title}

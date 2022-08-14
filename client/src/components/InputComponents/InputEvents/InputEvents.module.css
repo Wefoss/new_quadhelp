@@ -7,8 +7,9 @@ width: 50px;
 transform: translate(-50%, -50%);
 background: lightcoral;
 color: #fff;
-top: 100%;
+top: 135%;
 border-radius: 10px;
+width: 100px;
 }
 
 .errorBorder {
