@@ -3,7 +3,7 @@ import { Field, ErrorMessage } from 'formik';
 import classNames from 'classnames';
 
 const FormInput = ({
-  classes, label, name, ...rest
+  classes, label, name, appearBtn, ...rest
 }) => (
   <Field name={name}>
     {(props) => {
@@ -11,12 +11,15 @@ const FormInput = ({
         field,
         meta: { touched, error },
       } = props;
-
       const inputClassName = classNames(classes.input, {
         [classes.notValid]: touched && error,
         [classes.valid]: touched && !error,
+        
       });
-      return (
+        if(appearBtn) {
+          appearBtn(field.value) 
+        }
+        return (
         <div className={classes.container}>
           <input type="text" {...field} placeholder={label} className={inputClassName} {...rest} autoComplete='on' />
           <ErrorMessage name={name} component="span" className={classes.warning} />
@@ -25,5 +28,7 @@ const FormInput = ({
     }}
   </Field>
 );
+
+
 
 export default FormInput;

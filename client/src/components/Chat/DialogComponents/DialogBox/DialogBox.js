@@ -16,11 +16,11 @@ const DialogBox = (props) => {
     interlocutor,
   } = props;
   const {
-    favoriteList, participants, blackList, _id, text, createAt,
+    favoriteList, participants, blackList, _id, text, createdAt,
   } = chatPreview;
   const isFavorite = favoriteList[participants.indexOf(userId)];
   const isBlocked = blackList[participants.indexOf(userId)];
-  return (
+        return (
     <div
       className={styles.previewChatBox}
       onClick={() => goToExpandedDialog({
@@ -43,7 +43,7 @@ const DialogBox = (props) => {
           <span className={styles.interlocutorMessage}>{text}</span>
         </div>
         <div className={styles.buttonsContainer}>
-          <span className={styles.time}>{getTimeStr(createAt)}</span>
+          <span className={styles.time}>{getTimeStr(createdAt)}</span>
           <i
             onClick={(event) => changeFavorite({
               participants,

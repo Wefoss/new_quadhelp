@@ -132,7 +132,7 @@ export function* removeChatFromCatalogSaga(action) {
     const { data } = yield restController.removeChatFromCatalog(action.data);
     const { catalogList } = yield select((state) => state.chatStore);
     for (let i = 0; i < catalogList.length; i++) {
-      if (catalogList[i]._id === data._id) {
+      if (catalogList[i]._id === data.id) {
         catalogList[i].chats = data.chats;
         break;
       }

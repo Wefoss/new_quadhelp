@@ -18,10 +18,10 @@ const CatalogList = (props) => {
   const getListCatalog = () => {
     const { catalogList } = props;
     const elementList = [];
-    catalogList.forEach((catalog) => {
+    catalogList.forEach((catalog, i) => {
       elementList.push(<Catalog
         catalog={catalog}
-        key={catalog._id}
+        key={i}
         deleteCatalog={deleteCatalog}
         goToCatalog={goToCatalog}
       />);

@@ -14,6 +14,7 @@ const initialState = {
   isShowOnFull: false,
   imagePath: null,
   isShowModal: false,
+  valid: false
 };
 
 const getContestByIdReducer = (state = initialState, action) => {
@@ -34,6 +35,7 @@ const getContestByIdReducer = (state = initialState, action) => {
         contestData: action.data.contestData,
         error: null,
         offers: action.data.offers,
+        
       };
     }
     case ACTIONS.CHANGE_CONTEST_VIEW_MODE: {
@@ -69,6 +71,7 @@ const getContestByIdReducer = (state = initialState, action) => {
         ...state,
         error: null,
         offers: [...action.data],
+        
       };
     }
     case ACTIONS.CHANGE_MARK_SUCCESS: {
@@ -76,6 +79,7 @@ const getContestByIdReducer = (state = initialState, action) => {
         ...state,
         error: null,
         offers: [...action.data],
+        
       };
     }
     case ACTIONS.CHANGE_STORE_FOR_STATUS: {
@@ -126,12 +130,19 @@ const getContestByIdReducer = (state = initialState, action) => {
         ...state,
         isShowOnFull: action.data.isShowOnFull,
         imagePath: action.data.imagePath,
+        
       };
     }
     case ACTIONS.CHANGE_SHOW_MODAL: {
       return {
         ...state,
         isShowModal: action.data,
+      };
+    }
+    case ACTIONS.CHECK_VALIDATION_INPUT: {
+      return {
+        ...state,
+        valid: action.data.isValid,
       };
     }
     default:

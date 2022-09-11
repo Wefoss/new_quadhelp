@@ -29,6 +29,9 @@ db[ 'Contests' ].belongsTo(db[ 'Users' ],
 db[ 'Contests' ].hasMany(db[ 'Offers' ],
   { foreignKey: 'contestId', targetKey: 'id' });
 
+
+
+
 db[ 'Users' ].hasMany(db[ 'Offers' ],
   { foreignKey: 'userId', targetKey: 'id' });
 db[ 'Users' ].hasMany(db[ 'Contests' ],
@@ -36,6 +39,35 @@ db[ 'Users' ].hasMany(db[ 'Contests' ],
 db[ 'Users' ].hasMany(db[ 'Ratings' ],
   { foreignKey: 'userId', targetKey: 'id' });
 
+
+
+  db[ 'Message' ].belongsTo(db[ 'Users' ],
+  { foreignKey: 'userId', targetKey: 'id' }); 
+
+  db[ 'Message' ].belongsTo(db[ 'Conversation' ],
+  { foreignKey: 'conversationId', targetKey: 'id' }); 
+
+  db[ 'Users' ].hasMany(db[ 'Message' ],
+  { foreignKey: 'userId', targetKey: 'id' }); 
+
+  db[ 'Conversation' ].hasMany(db[ 'Message' ],
+  { foreignKey: 'conversationId', targetKey: 'id' }); 
+
+  db[ 'Users' ].hasMany(db[ 'Catalog' ],
+  { foreignKey: 'userId', targetKey: 'id' });
+
+  db[ 'Conversation' ].hasMany(db[ 'Catalog' ],
+  { foreignKey: 'chats', targetKey: 'id' });
+
+  db[ 'Catalog' ].belongsTo(db[ 'Users' ],
+  { foreignKey: 'userId', targetKey: 'id' });
+
+  db[ 'Catalog' ].belongsTo(db[ 'Conversation' ],
+  { foreignKey: 'chats', targetKey: 'id' });
+
+
+
+  
 db[ 'Offers' ].belongsTo(db[ 'Users' ],
   { foreignKey: 'userId', sourceKey: 'id' });
 db[ 'Offers' ].belongsTo(db[ 'Contests' ],

@@ -292,3 +292,8 @@ export const changeModalShow = (data) => ({
   type: ACTIONS.CHANGE_SHOW_MODAL,
   data,
 });
+
+export const checkValidationInput = (data) => ({
+  type: ACTIONS.CHECK_VALIDATION_INPUT,
+  data,
+});

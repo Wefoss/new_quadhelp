@@ -1,15 +1,39 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Formik, Form } from 'formik';
-import CONTANTS from '../../constants';
-import { setOffer, clearAddOfferError } from '../../actions/actionCreator';
-import styles from './OfferForm.module.sass';
-import ImageUpload from '../InputComponents/ImageUpload/ImageUpload';
-import FormInput from '../FormInput/FormInput';
-import Schems from '../../validators/validationSchems';
-import Error from '../Error/Error';
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { Formik, Form } from "formik";
+import CONTANTS from "../../constants";
+import {
+  setOffer,
+  clearAddOfferError,
+  checkValidationInput,
+} from "../../actions/actionCreator";
+import styles from "./OfferForm.module.sass";
+import ImageUpload from "../InputComponents/ImageUpload/ImageUpload";
+import FormInput from "../FormInput/FormInput";
+import Schems from "../../validators/validationSchems";
+import Error from "../Error/Error";
+import CONSTANTS from "../../constants";
 
 const OfferForm = (props) => {
+  const [checkValid, setCheckValid] = useState(false);
+ 
+  const {checkIsValid} = props
+  
+  useEffect(() => {
+    checkIsValid({ isValid: checkValid });
+    if(checkValid) {
+     checkIsValid({ isValid: checkValid });
+    }
+  }, [checkValid, checkIsValid]);
+
+  const appearBtn = (val) => {
+    new Promise((resolve) => {
+      resolve(val)
+           }).then(
+      (data) => (props.contestType !== CONSTANTS.LOGO_CONTEST && data) && setCheckValid(data)
+    )
+  };
+
   const renderOfferInput = () => {
     if (props.contestType === CONTANTS.LOGO_CONTEST) {
       return (
@@ -34,6 +58,7 @@ const OfferForm = (props) => {
         }}
         type="text"
         label="your suggestion"
+        appearBtn={appearBtn}
       />
     );
   };
@@ -42,30 +67,42 @@ const OfferForm = (props) => {
     props.clearOfferError();
     const data = new FormData();
     const { contestId, contestType, customerId } = props;
-    data.append('contestId', contestId);
-    data.append('contestType', contestType);
-    data.append('offerData', values.offerData);
-    data.append('customerId', customerId);
+    data.append("contestId", contestId);
+    data.append("contestType", contestType);
+    data.append("offerData", values.offerData);
+    data.append("customerId", customerId);
     props.setNewOffer(data);
     resetForm();
   };
 
-  const { valid, addOfferError, clearOfferError } = props;
-  const validationSchema = props.contestType === CONTANTS.LOGO_CONTEST ? Schems.LogoOfferSchema : Schems.TextOfferSchema;
+  const { valid, addOfferError, clearOfferError } = props.contestByIdStore;
+  const validationSchema =
+    props.contestType === CONTANTS.LOGO_CONTEST
+      ? Schems.LogoOfferSchema
+      : Schems.TextOfferSchema;
   return (
     <div className={styles.offerContainer}>
-      {addOfferError
-            && <Error data={addOfferError.data} status={addOfferError.status} clearError={clearOfferError} />}
+      {addOfferError && (
+        <Error
+          data={addOfferError.data}
+          status={addOfferError.status}
+          clearError={clearOfferError}
+        />
+      )}
       <Formik
         onSubmit={setOffer}
         initialValues={{
-          offerData: '',
+          offerData: "",
         }}
         validationSchema={validationSchema}
       >
         <Form className={styles.form}>
           {renderOfferInput()}
-          {valid && <button type="submit" className={styles.btnOffer}>Send Offer</button>}
+          {valid && (
+            <button type="submit" className={styles.btnOffer}>
+              Send Offer
+            </button>
+          )}
         </Form>
       </Formik>
     </div>
@@ -75,11 +112,12 @@ const OfferForm = (props) => {
 const mapDispatchToProps = (dispatch) => ({
   setNewOffer: (data) => dispatch(setOffer(data)),
   clearOfferError: () => dispatch(clearAddOfferError()),
+  checkIsValid: (data) => dispatch(checkValidationInput(data)),
 });
 
 const mapStateToProps = (state) => {
-  const { addOfferError } = state.contestByIdStore;
-  return { addOfferError };
+  const { contestByIdStore } = state;
+  return { contestByIdStore };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OfferForm);

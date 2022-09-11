@@ -12,4 +12,5 @@ module.exports = (err, req, res, next) => {
   } else {
     res.status(err.code).send(err.message);
   }
+  next(err)
 };
