@@ -5,6 +5,7 @@ const userController = require('../controllers/userController');
 const contestController = require('../controllers/contestController');
 const checkToken = require('../middlewares/checkToken');
 const validators = require('../middlewares/validators');
+const queries = require('../controllers/queries/userQueries')
 const chatController = require('../controllers/chatController');
 const upload = require('../utils/fileUpload');
 const router = express.Router();
@@ -61,6 +62,10 @@ router.post(
 router.get(
   '/getUser',
   checkToken.checkAuth,
+);
+router.get(
+  '/getUsers',
+  queries.getUsers,
 );
 
 router.get(
@@ -176,6 +181,12 @@ router.post(
   '/getCatalogs',
   checkToken.checkToken,
   chatController.getCatalogs,
+);
+
+router.get(
+  '/getOffers',
+  checkToken.checkToken,
+  contestController.getAllOffers
 );
 
 module.exports = router;

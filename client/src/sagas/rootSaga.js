@@ -2,7 +2,7 @@ import { takeLatest, takeLeading, takeEvery } from 'redux-saga/effects';
 import ACTIONS from '../actions/actionTypes';
 import { registerSaga, loginSaga } from './authSagas';
 import {
-  privateSaga, updateUserData, notAuthorizeSaga, headerRequest,
+  privateSaga, updateUserData, notAuthorizeSaga, headerRequest, getUsersSaga
 } from './userSaga';
 import { paymentSaga, cashoutSaga } from './paymentSaga';
 import {
@@ -13,7 +13,7 @@ import {
   getContestByIdSaga,
   downloadContestFileSaga,
 } from './contestsSagas';
-import { changeMarkSaga, setOfferStatusSaga, addOfferSaga } from './offerSagas';
+import { changeMarkSaga, setOfferStatusSaga, addOfferSaga, getOffers } from './offerSagas';
 import {
   previewSaga,
   getDialog,
@@ -57,6 +57,8 @@ function* rootSaga() {
   yield takeLatest(ACTIONS.DELETE_CATALOG_REQUEST, deleteCatalog);
   yield takeLatest(ACTIONS.REMOVE_CHAT_FROM_CATALOG_REQUEST, removeChatFromCatalogSaga);
   yield takeLatest(ACTIONS.CHANGE_CATALOG_NAME_REQUEST, changeCatalogName);
+  yield takeLatest(ACTIONS.GET_ALL_OFFERS_REQUEST, getOffers);
+  yield takeLatest(ACTIONS.GET_USERS_REQUEST, getUsersSaga);
 }
 
 export default rootSaga;

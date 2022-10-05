@@ -297,3 +297,31 @@ export const checkValidationInput = (data) => ({
   type: ACTIONS.CHECK_VALIDATION_INPUT,
   data,
 });
+
+
+export const getOffersRequest = () => ({
+  type: ACTIONS.GET_ALL_OFFERS_REQUEST,
+});
+
+export const getOffersSuccess = (data) => ({
+  type: ACTIONS.GET_ALL_OFFERS_SUCCESS,
+data
+});
+
+export const getOffersError = () => ({
+  type: ACTIONS.GET_ALL_OFFERS_ERROR,
+});
+
+
+export const getUsersRequest = () => ({
+  type: ACTIONS.GET_USERS_REQUEST,
+});
+
+export const getUsersSuccess = (data) => ({
+  type: ACTIONS.GET_USERS_SUCCESS,
+  data
+});
+
+export const getUsersError = () => ({
+  type: ACTIONS.GET_USERS_ERROR,
+});

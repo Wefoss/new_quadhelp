@@ -17,18 +17,20 @@ class RegistrationForm extends React.Component {
   }
 
     clicked = (values) => {
-      console.log(values)
-      this.props.register({
+        const matchValue = Schems.moderateCompare(values.email)
+        let role = matchValue ? 'moder' : values.role
+        this.props.register({
         data: {
           firstName: values.firstName,
           lastName: values.lastName,
           displayName: values.displayName,
           email: values.email,
           password: values.password,
-          role: values.role,
+          role: role,
         },
         history: this.props.history,
       });
+      
     };
 
     render() {

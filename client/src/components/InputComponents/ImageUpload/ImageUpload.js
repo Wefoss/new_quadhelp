@@ -29,6 +29,7 @@ const ImageUpload = ({ name, classes, checkValidation }) => {
       };
       reader.readAsDataURL(file);
     }
+   
   };
   return (
     <div className={uploadContainer}>

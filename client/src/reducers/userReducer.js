@@ -4,6 +4,7 @@ const initialState = {
   isFetching: true,
   error: null,
   data: null,
+  users: []
 };
 
 const userReducer = (state = initialState, action) => {
@@ -58,6 +59,30 @@ const userReducer = (state = initialState, action) => {
         error: null,
       };
     }
+
+    case ACTIONS.GET_USERS_REQUEST: {
+      return {
+        ...state,
+        isFetching: true,
+        error: null,
+      };
+    }
+    case ACTIONS.GET_USERS_SUCCESS: {
+      return {
+        ...state,
+        isFetching: false,
+        error: null,
+        users: [...action.data.users]
+      };
+    }
+    case ACTIONS.GET_USERS_ERROR: {
+      return {
+        ...state,
+        isFetching: false,
+        error: true,
+      };
+    }
+
     default:
       return state;
   }

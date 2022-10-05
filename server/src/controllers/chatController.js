@@ -4,7 +4,6 @@ const userQueries = require("./queries/userQueries");
 const controller = require("../socketInit");
 const _ = require("lodash");
 const { Op } = require("sequelize");
-const logger = require('../loggerErrors')
 const BadRequestError = require('../errors/BadRequestError')
 
 
@@ -14,7 +13,7 @@ module.exports.addMessage = async (req, res, next) => {
     (participant1, participant2) => participant1 - participant2
   );
   try {
-    const [newConve] = await db.Conversation.findCreateFind({
+    const [newConv] = await db.Conversation.findCreateFind({
       where: { from: participants[0], to: participants[1] },
       defaults: {
         from: participants[0],

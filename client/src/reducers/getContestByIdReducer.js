@@ -7,6 +7,7 @@ const initialState = {
   isEditContest: false,
   error: null,
   offers: [],
+  allOffers: [],
   changeMarkError: null,
   addOfferError: null,
   setOfferStatusError: null,
@@ -145,6 +146,30 @@ const getContestByIdReducer = (state = initialState, action) => {
         valid: action.data.isValid,
       };
     }
+    case ACTIONS.GET_ALL_OFFERS_REQUEST: {
+      return {
+        ...state,
+        isFetching: true,
+        error: null,
+      }
+    }
+    case ACTIONS.GET_ALL_OFFERS_SUCCESS: {
+        return {
+        ...state,
+        isFetching: false,
+        error: null,
+        allOffers: [...action.data]
+      }
+    }
+    case ACTIONS.GET_ALL_OFFERS_ERROR: {
+      return {
+        ...state,
+        isFetching: false,
+        error: true,
+        }
+    }
+
+     
     default:
       return state;
   }

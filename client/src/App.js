@@ -19,6 +19,7 @@ import CONSTANTS from "./constants";
 import ChatContainer from "./components/Chat/ChatComponents/ChatContainer/ChatContainer";
 import HowItWorkPage from "./pages/HowItWorks/HowItWorkPage";
 import EventsContest from "./pages/EventsContest/EventsContest";
+import ModerateOffers from "./components/ModerateOffers/ModerateOffers";
 
 class App extends Component {
   render() {
@@ -86,6 +87,10 @@ class App extends Component {
             exact
             path="/contest-events"
             component={EventsContest}/>
+             <Route   
+            exact
+            path="/offers"
+            component={ModerateOffers}/>
           <Route exact path="/dashboard" component={PrivateHoc(Dashboard)} />
           <Route
             exact

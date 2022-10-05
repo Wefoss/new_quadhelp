@@ -9,11 +9,11 @@ module.exports.checkAuth = async (req, res, next) => {
   if (!accessToken) {
     return next(new TokenError('need token'));
   }
-  
+ 
   try {
     const tokenData = jwt.verify(accessToken, CONSTANTS.JWT_SECRET);
     const foundUser = await userQueries.findUser({ id: tokenData.userId });
-    res.send({
+      res.send({
       firstName: foundUser.firstName,
       lastName: foundUser.lastName,
       role: foundUser.role,

@@ -1,6 +1,7 @@
 import { put } from 'redux-saga/effects';
 import ACTIONS from '../actions/actionTypes';
 import * as restController from '../api/rest/restController';
+import * as actionsCreator from '../actions/actionCreator'
 import { controller } from '../api/ws/socketController';
 
 export function* privateSaga(action) {
@@ -45,3 +46,13 @@ export function* headerRequest() {
     yield put({ type: ACTIONS.GET_USER_ERROR, error: e.response });
   }
 }
+
+export function* getUsersSaga() {
+    try {
+    const { data: {users} } = yield restController.getUsers();
+    yield put(actionsCreator.getUsersSuccess({users}));
+      } catch (e) {
+    yield put(actionsCreator.getUsersError({e}));
+  }
+}
+

@@ -1,5 +1,7 @@
 import http from '../interceptor';
 
+export const getUsers = () => http.get('getUsers');
+export const getAllOffers = () => http.get('getOffers');
 export const registerRequest = (data) => http.post('registration', data);
 export const loginRequest = (data) => http.post('login', data);
 export const getUser = () => http.get('getUser');
@@ -28,6 +30,7 @@ export const getCustomersContests = (data) => http.post('getCustomersContests', 
     status: data.contestStatus,
   },
 });
+
 
 export const getActiveContests = ({
   offset, limit, typeIndex, contestId, industry, awardSort, ownEntries,

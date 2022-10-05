@@ -13,7 +13,7 @@ class Header extends React.Component {
       this.props.getUser();
     }
   }
-
+  
     logOut = () => {
       localStorage.clear();
       this.props.clearUserStore();
@@ -23,19 +23,18 @@ class Header extends React.Component {
     startContests = () => {
       this.props.history.push('/startContest');
     };
-
     renderLoginButtons = () => {
       if (this.props.data) {
         return (
           <>
-            <div className={styles.userInfo}>
+      <div className={styles.userInfo}>
               <img
                 src={this.props.data.avatar === 'anon.png' ? CONSTANTS.ANONYM_IMAGE_PATH : `${CONSTANTS.publicURL}${this.props.data.avatar}`}
                 alt="user"
               />
               <span>{`Hi, ${this.props.data.displayName}`}</span>
               <img src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`} alt="menu" />
-              <ul>
+  {(this.props.data.role === 'creator' ||  this.props.data.role === 'customer')  &&   <ul>
                 <li>
                   <Link
                     to="/dashboard"
@@ -56,9 +55,18 @@ class Header extends React.Component {
                 <li>
                   <Link to="http:/www.google.com" style={{ textDecoration: 'none' }}><span>Affiliate Dashboard</span></Link>
                 </li>
-                <li><span onClick={this.logOut}>Logout</span></li>
-              </ul>
+              <li><span onClick={this.logOut}>Logout</span></li>
+                    </ul> }
+                    { this.props.data.role === 'moder' &&  
+                   <ul>
+                      
+                      <li><Link to="/offers" style={{ textDecoration: 'none' }}><span>Offers</span></Link></li>
+                      <li><Link to="/account" style={{ textDecoration: 'none' }}><span>My Account</span></Link></li>
+                      <li><span onClick={this.logOut}>Logout</span></li>
+                   </ul> 
+                 }
             </div>
+    
             <img src={`${CONSTANTS.STATIC_IMAGES_PATH}email.png`} className={styles.emailIcon} alt="email" />
           </>
         );
@@ -78,6 +86,7 @@ class Header extends React.Component {
     };
 
     render() {
+      
       if (this.props.isFetching) {
         return null;
       }
@@ -194,7 +203,7 @@ class Header extends React.Component {
                   </li>
                 </ul>
               </div>
-              {this.props.data && this.props.data.role !== CONSTANTS.CREATOR
+              {this.props.data && this.props.data.role !== (CONSTANTS.CREATOR && CONSTANTS.MODER)
                         && <div className={styles.startContestBtn} onClick={this.startContests}>START CONTEST</div>}
             </div>
           </div>

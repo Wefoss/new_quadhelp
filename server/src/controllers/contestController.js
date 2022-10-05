@@ -145,6 +145,28 @@ module.exports.setNewOffer = async (req, res, next) => {
   }
 };
 
+module.exports.getAllOffers = async (req, res, next) => {
+  try {
+      const result = await db.Offers.findAll({raw: true})
+      const contestInfo = await db.Contests.findAll({raw: true})
+      if(result.length > 1 && contestInfo.length) {
+        result.map((offer) => {
+          contestInfo.forEach((contest) => {
+            if(offer.contestId === contest.id) {
+             return offer.contestType = contest.contestType
+            }
+          })
+        })
+      }
+      if (!result) {
+     throw new ServerError('Bad Request');
+   } 
+   res.status(200).send({result})
+  } catch (error) {
+   next(error)
+  }
+};
+
 const rejectOffer = async (offerId, creatorId, contestId) => {
   const rejectedOffer = await contestQueries.updateOffer(
     { status: CONSTANTS.OFFER_STATUS_REJECTED }, { id: offerId });

@@ -1,7 +1,7 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Users', {
+      return queryInterface.createTable('Users', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -52,6 +52,7 @@ module.exports = {
         allowNull: false,
         defaultValue: 0,
       },
+      
     })
       .then(() => queryInterface.addConstraint('Users',  {
         type: 'check',
@@ -61,9 +62,28 @@ module.exports = {
             [ Sequelize.Op.gte ]: 0,
           },
         },
-      }));
+      }))
+      
   },
   down: (queryInterface, Sequelize) => {
+    queryInterface.sequelize.transaction(async (transaction) => {
+     
+      await queryInterface.sequelize.query('DROP TYPE IF EXISTS enum_Users_role;', {
+        transaction
+      });
+      await queryInterface.changeColumn(
+        'Users',
+        'role',
+        {
+          type: Sequelize.ENUM(
+            'ustomer', 'creator', 'moder'
+          )
+        },
+        {
+          transaction
+        }
+      );
+    })
     return queryInterface.dropTable('Users');
   },
 };

@@ -72,6 +72,7 @@ const OfferForm = (props) => {
     data.append("offerData", values.offerData);
     data.append("customerId", customerId);
     props.setNewOffer(data);
+    checkIsValid({ isValid: checkValid });
     resetForm();
   };
 
