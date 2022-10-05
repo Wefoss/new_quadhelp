@@ -2,12 +2,15 @@ const jwt = require('jsonwebtoken');
 const CONSTANTS = require('../constants');
 const bd = require('../models');
 const NotUniqueEmail = require('../errors/NotUniqueEmail');
+const badRequest = require('../errors/BadRequestError')
 const moment = require('moment');
 const { v4: uuid } = require('uuid');
 const controller = require('../socketInit');
 const userQueries = require('./queries/userQueries');
 const bankQueries = require('./queries/bankQueries');
 const ratingQueries = require('./queries/ratingQueries');
+const db = require('../models');
+
 
 module.exports.login = async (req, res, next) => {
   try {
@@ -32,7 +35,7 @@ module.exports.login = async (req, res, next) => {
 };
 module.exports.registration = async (req, res, next) => {
   try {
-    const newUser = await userQueries.userCreation(
+       const newUser = await  userQueries.userCreation(
       Object.assign(req.body, { password: req.hashPass }));
     const accessToken = jwt.sign({
       firstName: newUser.firstName,
@@ -55,6 +58,7 @@ module.exports.registration = async (req, res, next) => {
     }
   }
 };
+
 
 function getQuery (offerId, userId, mark, isFirst, transaction) {
   const getCreateQuery = () => ratingQueries.createRating({
