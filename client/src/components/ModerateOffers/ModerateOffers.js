@@ -5,6 +5,7 @@ import OfferBox from '../OfferBox/OfferBox';
 import ModerateOffer from '../ModerateOffer/ModerateOffer';
 import * as actionCreator from '../../actions/actionCreator'
 
+
 class ModerateOffers extends Component {
     constructor(props) {
          super(props)
@@ -13,6 +14,7 @@ class ModerateOffers extends Component {
             stateOffers: []
          }
     }
+    
     
     componentDidMount() {
         this.props.getUsers()
@@ -41,29 +43,32 @@ class ModerateOffers extends Component {
         needButtons() {
             console.log('button');
         }
-        setOfferStatus() {
-            console.log('setOffers');
+        setOfferStatus(userId, offerId, condition) {
+            console.log(userId, offerId, condition);
         }
 
 
     render() { 
       const {reduildUsers, stateOffers} = this.state
-  
+      
             return (
+              
                 <Fragment>
                     <Header/>
                     
                 <div style={{'width': '800px', 'height': '400px', 'backgroundColor': 'lightgray', margin: '0 auto'}}>
                     <ul>
-                        { this.state.reduildUsers && stateOffers.map((el) => <ModerateOffer 
-                          data={el}
-                          key={el.id}
-                          needButtons={this.needButtons}
-                          setOfferStatus={this.setOfferStatus}
-                          date={new Date()}
-                          currentUser={reduildUsers[el.userId]}
-                          isAllOffers={true}
-                          />)}
+                        { this.state.reduildUsers && stateOffers.map((el) =>  {
+                               el.User = reduildUsers[el.userId]
+                            return <OfferBox 
+                            data={el}
+                            key={el.id}
+                            needButtons={this.needButtons}
+                            setOfferStatus={this.setOfferStatus}
+                            date={new Date()}
+                            contestType={el.contestType}
+                            />
+                        })}
                           
                     </ul>
               
@@ -77,7 +82,8 @@ class ModerateOffers extends Component {
 
 const mapStateToProps = (state) => ({
     offers: state.contestByIdStore.allOffers,
-    users: state.userStore.users
+    users: state.userStore.users,
+    contestById: state.contestByIdStore
 }) 
 const mapStateToDispatch = (dispatch) => ({
     getData: () => dispatch(actionCreator.getOffersRequest()),

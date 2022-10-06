@@ -37,7 +37,7 @@ class ContestPage extends React.Component {
       const { params } = this.props.match;
       this.props.getData({ contestId: params.id });
     };
-
+    
     setOffersList = () => {
       const array = [];
       for (let i = 0; i < this.props.contestByIdStore.offers.length; i++) {
