@@ -9,48 +9,57 @@ import * as actionCreator from '../../actions/actionCreator'
 class ModerateOffers extends Component {
     constructor(props) {
          super(props)
-         this.state = {
-            reduildUsers: [],
-            stateOffers: []
-         }
+       
     }
-    
-    
+        
     componentDidMount() {
+       this.getData()
+       
+        }
+
+     getData() {
+        this.props.getContests({
+            limit: null,
+            offset: 0,
+        })
         this.props.getUsers()
         this.props.getData()
-          }
+     }
 
-          componentDidUpdate(prevProps, prevState) {
-            if(prevProps !== this.props) {
-             this.somemethpod(this.props.users)
-             this.addOffersToState(this.props.offers)
-            }
-           }
-           
-           addOffersToState(items) {
-            this.setState({stateOffers: items})
-           }
+    componentWillUnmount() {
+        this.props.clearContestsList()
+    }
 
-           somemethpod(data) { 
-        const users = data.reduce((acc, el) => {
-             acc[el.id] = el
-               return acc  
-         }, {})
-       this.setState({reduildUsers: users})
-        }
+  
+
 
         needButtons() {
             console.log('button');
         }
-        setOfferStatus(userId, offerId, condition) {
-            console.log(userId, offerId, condition);
+
+        setOfferStatus = (creatorId, offerId, command, objContest) => {
+            this.props.clearSetOfferStatusErrorDispatch()
+             console.log(creatorId, offerId, command, objContest);
+            const obj = {
+                command,
+                offerId,
+                creatorId,
+                orderId: objContest.orderId,
+                priority: objContest.priority,
+                contestId: objContest.id,
+                userId: objContest.userId
+              };        
+             this.props.setOfferStatusDispatch(obj)
+                          
         }
 
 
+
+
     render() { 
-      const {reduildUsers, stateOffers} = this.state
-      
+        const {contests, users, offersStore, offers} = this.props 
+         console.log(offers);
+           
             return (
               
                 <Fragment>
@@ -58,17 +67,18 @@ class ModerateOffers extends Component {
                     
                 <div style={{'width': '800px', 'height': '400px', 'backgroundColor': 'lightgray', margin: '0 auto'}}>
                     <ul>
-                        { this.state.reduildUsers && stateOffers.map((el) =>  {
-                               el.User = reduildUsers[el.userId]
+                        { (offers.length && users.length && contests.length) ? offers.map((el) =>  {
+                            el.User = users.find((user) => user.id === el.userId)
+                            el.contestOffer = contests.find((contest) => contest.id === el.contestId)
                             return <OfferBox 
                             data={el}
                             key={el.id}
                             needButtons={this.needButtons}
                             setOfferStatus={this.setOfferStatus}
                             date={new Date()}
-                            contestType={el.contestType}
+                            contestType={el.contestOffer.contestType}
                             />
-                        })}
+                        }) : <p>Loading Offres</p> }
                           
                     </ul>
               
@@ -82,12 +92,18 @@ class ModerateOffers extends Component {
 
 const mapStateToProps = (state) => ({
     offers: state.contestByIdStore.allOffers,
+    offersStore: state.contestByIdStore,
     users: state.userStore.users,
-    contestById: state.contestByIdStore
-}) 
+    contests: state.contestsList.contests
+    }) 
 const mapStateToDispatch = (dispatch) => ({
     getData: () => dispatch(actionCreator.getOffersRequest()),
-    getUsers: () =>dispatch(actionCreator.getUsersRequest())
+    getUsers: () =>dispatch(actionCreator.getUsersRequest()),
+    getContests: (data) => dispatch(actionCreator.getContestsForCreative(data)),
+    setOfferStatusDispatch: (data) => dispatch(actionCreator.setOfferStatus(data)),
+    clearContestsList: () => dispatch(actionCreator.clearContestList()),
+    clearSetOfferStatusErrorDispatch: () => dispatch(actionCreator.clearSetOfferStatusError()),
+    
    })
 
 export default connect(mapStateToProps, mapStateToDispatch)(ModerateOffers);
