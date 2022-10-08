@@ -149,15 +149,19 @@ module.exports.getAllOffers = async (req, res, next) => {
   try {
       const result = await db.Offers.findAll({raw: true})
       const contestInfo = await db.Contests.findAll({raw: true})
-      if(result.length > 1 && contestInfo.length) {
-        result.map((offer) => {
-          contestInfo.forEach((contest) => {
-            if(offer.contestId === contest.id) {
-             return offer.contestType = contest.contestType
-            }
-          })
-        })
-      }
+      // if(result.length > 1 && contestInfo.length) {
+      //   result.map((offer) => {
+      //     contestInfo.forEach((contest) => {
+      //       if(offer.contestId === contest.id) {
+      //        return (
+      //         offer.orderId = contest.orderId,
+      //         offer.contestType = contest.contestType,
+      //         offer.orderPriority = contest.priority
+      //         )
+      //       }
+      //     })
+      //   })
+      // }
       if (!result) {
      throw new ServerError('Bad Request');
    } 
@@ -168,6 +172,7 @@ module.exports.getAllOffers = async (req, res, next) => {
 };
 
 const rejectOffer = async (offerId, creatorId, contestId) => {
+  console.log(offerId, creatorId, contestId);
   const rejectedOffer = await contestQueries.updateOffer(
     { status: CONSTANTS.OFFER_STATUS_REJECTED }, { id: offerId });
   controller.getNotificationController().emitChangeOfferStatus(creatorId,
@@ -215,7 +220,7 @@ const resolveOffer = async (
 
 module.exports.setOfferStatus = async (req, res, next) => {
   let transaction;
-  if (req.body.command === 'reject') {
+  if (req.body.command === 'rejected') {
     try {
       const offer = await rejectOffer(req.body.offerId, req.body.creatorId,
         req.body.contestId);
@@ -223,7 +228,7 @@ module.exports.setOfferStatus = async (req, res, next) => {
     } catch (err) {
       next(err);
     }
-  } else if (req.body.command === 'resolve') {
+  } else if (req.body.command === 'won') {
     try {
       transaction = await db.sequelize.transaction();
       const winningOffer = await resolveOffer(req.body.contestId,

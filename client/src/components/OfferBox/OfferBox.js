@@ -43,7 +43,7 @@ const OfferBox = (props) => {
       buttons: [
         {
           label: 'Yes',
-          onClick: () => props.setOfferStatus(props.data.User.id, props.data.id, 'resolve'),
+          onClick: () => props.setOfferStatus(props.data.User.id, props.data.id, CONSTANTS.OFFER_STATUS_WON, {id: props.data.contestOffer.id, orderId: props.data.contestOffer.orderId, priority: props.data.contestOffer.priority, userId: props.data.contestOffer.userId}),
         },
         {
           label: 'No',
@@ -59,7 +59,7 @@ const OfferBox = (props) => {
       buttons: [
         {
           label: 'Yes',
-          onClick: () => props.setOfferStatus(props.data.User.id, props.data.id, 'reject'),
+          onClick: () => props.setOfferStatus(props.data.User.id, props.data.id, CONSTANTS.OFFER_STATUS_REJECTED, {id: props.data.contestOffer.id, orderId: props.data.contestOffer.orderId, priority: props.data.contestOffer.priority, userId: props.data.contestOffer.userId}),
         },
         {
           label: 'No',
@@ -103,6 +103,7 @@ const OfferBox = (props) => {
   const {
     avatar, firstName, lastName, email, rating,
   } = props.data.User;
+
 
 
   return (

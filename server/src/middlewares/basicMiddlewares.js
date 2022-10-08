@@ -84,11 +84,12 @@ module.exports.canSendOffer = async (req, res, next) => {
 
 module.exports.onlyForCustomerWhoCreateContest = async (req, res, next) => {
   try {
+    const {dataValues} =  await bd.Users.findByPk(req.tokenData.userId, {row:true})
     const result = await bd.Contests.findOne({
       where: {
-        userId: req.tokenData.userId,
+        userId: dataValues.role === CONSTANTS.MODER ? req.body.userId : req.tokenData.userId,
         id: req.body.contestId,
-        status: CONSTANTS.CONTEST_STATUS_ACTIVE,
+        status: dataValues.role === CONSTANTS.MODER ? CONSTANTS.CONTEST_STATUS_FINISHED : CONSTANTS.CONTEST_STATUS_ACTIVE,
       },
     });
     if (!result) {

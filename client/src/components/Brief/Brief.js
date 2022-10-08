@@ -69,7 +69,7 @@ const Brief = (props) => {
     return (
       <ContestInfo
         userId={id}
-        contestData={contestData && contestData}
+        contestData={contestData}
         changeEditContest={changeEditContest}
         role={role}
         goChat={goChat}

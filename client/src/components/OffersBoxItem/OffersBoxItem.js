@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 const OffersBoxItem = ({avatar, firstName, lastName, rating, offerStatus, email, contestType, data,
      role, goChat, id, changeMark, rejectOffer, resolveOffer, changeShowImage}) => {
 
-        const isUsers = useSelector((state) => state.userStore.users).length > 0
+       
         
     return (
         <>

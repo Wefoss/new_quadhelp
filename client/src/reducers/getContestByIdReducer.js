@@ -84,10 +84,14 @@ const getContestByIdReducer = (state = initialState, action) => {
       };
     }
     case ACTIONS.CHANGE_STORE_FOR_STATUS: {
+      
+    
       return {
         ...state,
         error: null,
         offers: [...action.data],
+        allOffers:  state.allOffers.map((el) => el.id === action.data.id ? {...el, status: action.data.status} : el)
+        
       };
     }
     case ACTIONS.CHANGE_MARK_ERROR: {
@@ -102,6 +106,18 @@ const getContestByIdReducer = (state = initialState, action) => {
         addOfferError: action.error,
       };
     }
+
+
+    case ACTIONS.SET_OFFER_STATUS_ACTION: {
+      return {
+        ...state,
+        isFetching: true,
+        error: null,
+      };
+    }
+  
+   
+
     case ACTIONS.SET_OFFER_STATUS_ERROR: {
       return {
         ...state,

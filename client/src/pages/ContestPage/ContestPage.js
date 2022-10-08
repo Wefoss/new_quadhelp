@@ -36,7 +36,7 @@ class ContestPage extends React.Component {
     getData = () => {
       const { params } = this.props.match;
       this.props.getData({ contestId: params.id });
-    };
+      };
     
     setOffersList = () => {
       const array = [];
@@ -101,6 +101,7 @@ class ContestPage extends React.Component {
     };
 
     render() {
+      console.log(this.props.contestByIdStore.contestData)
       const { role } = this.props.userStore.data;
       const {
         contestByIdStore,
@@ -120,6 +121,7 @@ class ContestPage extends React.Component {
         setOfferStatusError,
       } = contestByIdStore;
       return (
+        
         <div>
           {/* <Chat/> */}
           {isShowOnFull && (
